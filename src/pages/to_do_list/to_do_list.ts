@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { ToDoService } from './to_do.service';
+import { ToDoService } from '../../providers/to_do.service';
 
-import { NavController } from 'ionic-angular';
+import { NavController} from 'ionic-angular';
+import { DetailsPage } from '../details/details';
 
 @Component({
   selector: 'to-do-list',
@@ -9,7 +10,7 @@ import { NavController } from 'ionic-angular';
   providers: [ToDoService]
 })
 export class ToDoList {
-  constructor(public navCtrl: NavController, private toDoService: ToDoService) {
+  constructor(private toDoService: ToDoService,  private nav: NavController) {
     
   }
 
@@ -21,4 +22,7 @@ export class ToDoList {
     this.toDoService.remove(toDo);
   };
 
+  goToDetails(toDo) {  
+    this.nav.push(DetailsPage, { toDo: toDo });
+  };
 }
